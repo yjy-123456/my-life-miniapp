@@ -1,0 +1,106 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+		}
+	},
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "她和它的日常",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/dogs/album",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "狗狗相册"
+			}
+		},
+		{
+			"path": "pages/about/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "关于我们"
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pages/daily",
+			"pages": [
+				{
+					"path": "list",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "日常记录"
+					}
+				},
+				{
+					"path": "detail",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "详情"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages-sub/viewer",
+			"pages": [
+				{
+					"path": "index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "查看照片"
+					}
+				}
+			]
+		}
+	],
+	"preloadRule": {
+		"pages/index/index": {
+			"network": "all",
+			"packages": ["pages/daily"]
+		}
+	},
+	"tabBar": {
+		"color": "#9B8E8E",
+		"selectedColor": "#D4A5A5",
+		"backgroundColor": "#FAF7F4",
+		"borderStyle": "white",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "日常",
+				"iconPath": "static/icons/home.png",
+				"selectedIconPath": "static/icons/home-active.png"
+			},
+			{
+				"pagePath": "pages/dogs/album",
+				"text": "狗狗",
+				"iconPath": "static/icons/paw.png",
+				"selectedIconPath": "static/icons/paw-active.png"
+			},
+			{
+				"pagePath": "pages/about/index",
+				"text": "我们",
+				"iconPath": "static/icons/heart.png",
+				"selectedIconPath": "static/icons/heart-active.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "她和它的日常",
+		"navigationBarBackgroundColor": "#FAF7F4",
+		"backgroundColor": "#FAF7F4",
+		"backgroundColorTop": "#FAF7F4",
+		"backgroundColorBottom": "#FAF7F4"
+	}
+}

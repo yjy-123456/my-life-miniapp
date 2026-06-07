@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm search *)",
+      "Bash(npm install *)",
+      "WebSearch",
+      "Bash(npx uipro-cli *)",
+      "Bash(npx skills-installer *)",
+      "Read(//private/tmp/**)",
+      "Bash(npx degit *)",
+      "Bash(cp -r src /Users/yangjianyong/Projects/personal/my-life-miniapp/)",
+      "Bash(cp index.html vite.config.js shims-uni.d.ts package.json /Users/yangjianyong/Projects/personal/my-life-miniapp/)",
+      "Bash(rm -rf /tmp/uni-temp-scaffold)",
+      "WebFetch(domain:developers.weixin.qq.com)",
+      "Bash(curl -sI \"https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin-arm64&from=mpwiki\")",
+      "Bash(npx uni *)",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git rm *)"
+    ],
+    "additionalDirectories": [
+      "/private/tmp/uni-temp-scaffold"
+    ]
+  }
+}

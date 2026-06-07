@@ -1,0 +1,91 @@
+/**
+ * 全局样式变量 — 「她和它的日常」
+ * 设计风格: 温柔 · 浪漫 · 治愈 · 生活感 · 精致
+ */
+/* Wot Design Uni 通过 easycom 自动导入，组件样式随组件加载 */
+
+/* ========================================
+   主题色 — 暖色系 / 莫兰迪 / 奶油质感
+   ======================================== */
+$color-primary:        #D4A5A5;   // 干枯玫瑰 (主色调)
+$color-primary-light:  #F0E0E0;   // 浅玫瑰
+$color-primary-dark:   #B88080;   // 深玫瑰
+
+$color-dog-accent:     #E8B86D;   // 金毛暖橙 (狗狗专题)
+
+/* 中性色 */
+$color-bg-page:        #FAF7F4;   // 暖白底色
+$color-bg-card:        #FFFFFF;
+$color-text-primary:   #3D3535;   // 深棕黑
+$color-text-secondary: #9B8E8E;   // 灰棕
+$color-text-hint:      #C4BABA;   // 浅灰棕
+$color-border:         #F0EBE8;   // 暖色边框
+
+/* 功能色 */
+$color-success:        #8BC34A;
+$color-warning:        #FFB74D;
+$color-error:          #EF9A9A;
+
+/* ========================================
+   覆盖 uni-app 内置变量
+   ======================================== */
+$uni-color-primary:    $color-primary;
+$uni-color-success:    $color-success;
+$uni-color-warning:    $color-warning;
+$uni-color-error:      $color-error;
+
+$uni-text-color:       $color-text-primary;
+$uni-text-color-grey:  $color-text-secondary;
+$uni-text-color-placeholder: $color-text-hint;
+
+$uni-bg-color:         $color-bg-card;
+$uni-bg-color-grey:    $color-bg-page;
+$uni-bg-color-hover:   $color-border;
+
+$uni-border-color:     $color-border;
+
+/* ========================================
+   间距系统 (rpx)
+   ======================================== */
+$spacing-xs:  8rpx;
+$spacing-sm:  16rpx;
+$spacing-md:  24rpx;
+$spacing-lg:  32rpx;
+$spacing-xl:  48rpx;
+
+/* ========================================
+   圆角系统
+   ======================================== */
+$radius-sm:    8rpx;
+$radius-md:    16rpx;
+$radius-lg:    24rpx;
+$radius-round: 999rpx;
+
+/* ========================================
+   字体层级 (rpx)
+   ======================================== */
+$font-h1:      40rpx;
+$font-h2:      34rpx;
+$font-h3:      30rpx;
+$font-body:    28rpx;
+$font-caption: 24rpx;
+$font-small:   20rpx;
+
+/* ========================================
+   阴影
+   ======================================== */
+$shadow-card:  0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+$shadow-float: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
+
+/* ========================================
+   全局基础样式
+   ======================================== */
+page {
+  background-color: $color-bg-page;
+  color: $color-text-primary;
+  font-size: $font-body;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+               'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
