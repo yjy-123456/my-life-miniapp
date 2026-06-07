@@ -1,6 +1,6 @@
 {
 	"name": "她和它的日常",
-	"appid": "wxd4dd09ecee69d4c7",
+	"appid": "wxdc26d0c1be556518",
 	"description": "记录我们的日常和豆豆的每一个瞬间",
 	"versionName": "1.0.0",
 	"versionCode": "100",
@@ -45,7 +45,7 @@
 	"quickapp": {},
 	/* 微信小程序特有相关 */
 	"mp-weixin": {
-		"appid": "wxd4dd09ecee69d4c7",
+		"appid": "wxdc26d0c1be556518",
 		"setting": {
 			"urlCheck": false,
 			"es6": true,

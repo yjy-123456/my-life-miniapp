@@ -101,6 +101,8 @@
 		"navigationBarBackgroundColor": "#FAF7F4",
 		"backgroundColor": "#FAF7F4",
 		"backgroundColorTop": "#FAF7F4",
-		"backgroundColorBottom": "#FAF7F4"
+		"backgroundColorBottom": "#FAF7F4",
+		"animationType": "fade-in",
+		"animationDuration": 300
 	}
 }
