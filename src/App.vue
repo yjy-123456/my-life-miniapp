@@ -4,7 +4,7 @@ import { initCloud } from './common/cloud.js'
 export default {
   onLaunch: function () {
     console.log('App Launch')
-    // 初始化微信云开发1
+    // 初始化微信云开发
     // #ifdef MP-WEIXIN
     initCloud()
     // #endif
