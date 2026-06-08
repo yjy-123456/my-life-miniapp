@@ -1,0 +1,90 @@
+[
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 800,
+    "height": 1000,
+    "caption": "海边奔跑的豆豆 🌊",
+    "tags": ["出去玩", "海边"],
+    "takenAt": { "$date": "2026-06-06T14:00:00.000Z" },
+    "createdAt": { "$date": "2026-06-06T14:00:00.000Z" },
+    "sortOrder": 10,
+    "isFavorite": true
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 800,
+    "height": 1200,
+    "caption": "睡成一只小猪 🐷",
+    "tags": ["睡觉", "日常"],
+    "takenAt": { "$date": "2026-06-03T22:00:00.000Z" },
+    "createdAt": { "$date": "2026-06-03T22:00:00.000Z" },
+    "sortOrder": 9,
+    "isFavorite": true
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 1000,
+    "height": 800,
+    "caption": "穿新衣服啦 👔",
+    "tags": ["日常", "衣服"],
+    "takenAt": { "$date": "2026-05-28T18:00:00.000Z" },
+    "createdAt": { "$date": "2026-05-28T18:00:00.000Z" },
+    "sortOrder": 8,
+    "isFavorite": false
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 800,
+    "height": 1100,
+    "caption": "公园玩球的豆豆 🎾",
+    "tags": ["出去玩", "公园"],
+    "takenAt": { "$date": "2026-05-25T16:00:00.000Z" },
+    "createdAt": { "$date": "2026-05-25T16:00:00.000Z" },
+    "sortOrder": 7,
+    "isFavorite": true
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 900,
+    "height": 900,
+    "caption": "洗澡后的委屈脸 🛁",
+    "tags": ["洗澡", "日常"],
+    "takenAt": { "$date": "2026-05-18T19:00:00.000Z" },
+    "createdAt": { "$date": "2026-05-18T19:00:00.000Z" },
+    "sortOrder": 6,
+    "isFavorite": false
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 800,
+    "height": 1050,
+    "caption": "花市里的小探险家 🌸",
+    "tags": ["出去玩", "花市"],
+    "takenAt": { "$date": "2026-05-08T11:00:00.000Z" },
+    "createdAt": { "$date": "2026-05-08T11:00:00.000Z" },
+    "sortOrder": 5,
+    "isFavorite": true
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 1000,
+    "height": 750,
+    "caption": "收到新玩具超开心 🎁",
+    "tags": ["日常", "玩具"],
+    "takenAt": { "$date": "2026-05-20T20:00:00.000Z" },
+    "createdAt": { "$date": "2026-05-20T20:00:00.000Z" },
+    "sortOrder": 4,
+    "isFavorite": false
+  },
+  {
+    "image": "← 替换为云存储 fileID →",
+    "width": 800,
+    "height": 1150,
+    "caption": "沙发上发呆的午后 ☀️",
+    "tags": ["睡觉", "日常"],
+    "takenAt": { "$date": "2026-04-30T15:00:00.000Z" },
+    "createdAt": { "$date": "2026-04-30T15:00:00.000Z" },
+    "sortOrder": 3,
+    "isFavorite": false
+  }
+]
