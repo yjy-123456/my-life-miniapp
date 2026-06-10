@@ -109,7 +109,7 @@ export default {
       this.photoList = idList.map((id) => ({ _id: id }))
       this.currentIndex = Math.max(0, idList.indexOf(options.id))
 
-      // 加载图片 URL
+      // 加载图片信息（微信小程序 image 原生支持 cloud:// 路径）
       await this.loadPhotoUrls(idList)
 
       // 加载相邻照片的详细信息
@@ -127,34 +127,27 @@ export default {
     }, 1000)
   },
   methods: {
-    /**
-     * 批量加载图片 URL
-     * 云存储 fileID 需要转为临时链接才能在小程序中显示
-     */
     async loadPhotoUrls(idList) {
-      // 从云数据库加载照片的 fileID
       try {
         // #ifdef MP-WEIXIN
         const db = wx.cloud.database()
         const res = await db
           .collection('dog_photos')
           .where({
-            _id: db.command.in(idList.slice(0, 50)), // 限制最多 50 条
+            _id: db.command.in(idList.slice(0, 50)),
           })
           .field({ image: true, caption: true, takenAt: true })
           .get()
 
         if (res.data && res.data.length) {
-          // 构建 id → data 映射
           const dataMap = {}
           res.data.forEach((item) => {
             dataMap[item._id] = item
           })
 
-          // 收集所有 fileID
+          // 通过云函数获取临时链接
           const fileIds = res.data.map((item) => item.image).filter(Boolean)
           const urlMap = {}
-
           if (fileIds.length) {
             const urls = await getTempFileUrls(fileIds)
             fileIds.forEach((fid, i) => {
@@ -162,7 +155,6 @@ export default {
             })
           }
 
-          // 更新 photoList
           this.photoList = this.photoList.map((photo) => {
             const data = dataMap[photo._id]
             if (data) {
@@ -192,7 +184,6 @@ export default {
       adjacent.forEach((i) => {
         if (!this.photoList[i].image) {
           // 在微信小程序中，image 组件的 lazy-load 不适用于 swiper
-          // 这里可以额外调用加载逻辑
         }
       })
     },

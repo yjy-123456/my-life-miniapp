@@ -138,13 +138,59 @@ export async function getConfigValue(key) {
 
 /**
  * 获取临时文件链接 (云存储 fileID → 临时 URL)
+ * 通过云函数中转，以管理员权限调用，不受客户端存储权限限制
  * @param {string[]} fileIds
  * @returns {Promise<string[]>} 临时链接数组
  */
 export async function getTempFileUrls(fileIds) {
   if (!fileIds || fileIds.length === 0) return []
-  const res = await wx.cloud.getTempFileURL({ fileList: fileIds })
-  return res.fileList.map(f => f.tempFileURL || '')
+
+  // 过滤掉无效的 fileID：必须是 cloud:// 开头
+  const validIds = fileIds.filter(id => {
+    if (!id || typeof id !== 'string') return false
+    if (!id.startsWith('cloud://')) {
+      console.warn('⚠️ 无效的 fileID (不是 cloud:// 开头):', id)
+      return false
+    }
+    return true
+  })
+
+  if (validIds.length === 0) return []
+
+  try {
+    // 分批调用云函数：每次最多 50 个
+    const batchSize = 50
+    const results = []
+
+    for (let i = 0; i < validIds.length; i += batchSize) {
+      const batch = validIds.slice(i, i + batchSize)
+      const res = await wx.cloud.callFunction({
+        name: 'getTempUrls',
+        data: { fileList: batch }
+      })
+
+      if (res.result && res.result.code === 0) {
+        results.push(...res.result.data)
+      } else {
+        console.warn('⚠️ 云函数返回异常:', res.result)
+        // 补上对应数量的空字符串，保持索引对齐
+        results.push(...batch.map(() => ''))
+      }
+    }
+
+    // 为原始 fileIds 数组中的无效 ID 补上空字符串
+    const resultMap = {}
+    validIds.forEach((id, idx) => { resultMap[id] = results[idx] || '' })
+
+    return fileIds.map(id => {
+      if (resultMap.hasOwnProperty(id)) return resultMap[id]
+      return '' // 无效 ID 返回空字符串
+    })
+  } catch (e) {
+    console.error('❌ getTempFileUrls 调用失败:', e)
+    // 返回空数组，调用方已有兜底处理
+    return fileIds.map(() => '')
+  }
 }
 
 // #endif

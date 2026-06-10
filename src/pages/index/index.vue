@@ -173,16 +173,30 @@ export default {
   methods: {
     async loadConfig() {
       try {
+        console.log('🔍 [loadConfig] 开始加载配置...')
         const config = await getSiteConfig(['cover_images', 'hero_quote'])
-        if (config.cover_images && config.cover_images.length) {
-          const urls = await getTempFileUrls(config.cover_images)
-          this.coverImages = urls.filter(Boolean)
+        console.log('🔍 [loadConfig] 配置获取成功, cover_images:', JSON.stringify(config.cover_images))
+
+        let coverList = config.cover_images
+        if (typeof coverList === 'string') {
+          coverList = [coverList]
         }
-        if (config.heroQuote) {
-          this.heroQuote = config.heroQuote
+
+        if (Array.isArray(coverList) && coverList.length) {
+          console.log('🔍 [loadConfig] 调用 getTempFileUrls, 数量:', coverList.length)
+          const urls = await getTempFileUrls(coverList.filter(Boolean))
+          console.log('🔍 [loadConfig] getTempFileUrls 返回:', JSON.stringify(urls))
+          this.coverImages = urls.filter(Boolean)
+          console.log('🔍 [loadConfig] coverImages 设置完成, 有效:', this.coverImages.length)
+        } else {
+          console.log('🔍 [loadConfig] 无封面图片配置')
+        }
+
+        if (config.hero_quote) {
+          this.heroQuote = config.hero_quote
         }
       } catch (e) {
-        console.log('配置加载失败', e)
+        console.error('❌ [loadConfig] 失败:', e.message || e)
       }
     },
 
