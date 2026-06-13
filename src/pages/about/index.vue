@@ -41,13 +41,15 @@
     <!-- 标题区 -->
     <view class="about-header">
       <text class="about-title">{{ config.about_title || '关于我们' }}</text>
-      <text class="about-subtitle">她和它的日常</text>
+      <text class="about-subtitle">我们的故事</text>
     </view>
 
     <!-- 关于我们 -->
     <view class="card about-card">
       <text class="card-title">我们的故事</text>
-      <text class="about-text">{{ config.about_content || '这里记录的是我们的故事。\n\n每一天都值得被记住，每一个瞬间都是独一无二的。' }}</text>
+      <view class="about-text">
+        <text v-for="(line, i) in aboutLines" :key="i" class="about-line">{{ line }}</text>
+      </view>
     </view>
 
     <!-- 关于狗狗 -->
@@ -62,27 +64,22 @@
           <text class="bio-text">{{ config.dog_bio }}</text>
         </view>
 
-        <view class="dog-stats">
-          <view v-if="dogAge" class="stat-item">
-            <text class="stat-value">{{ dogAge }}</text>
-            <text class="stat-label">年龄</text>
-          </view>
-          <view v-if="dogBirthday" class="stat-item">
-            <text class="stat-value">{{ dogBirthday }}</text>
-            <text class="stat-label">生日</text>
-          </view>
-          <view v-if="daysWithDog" class="stat-item">
-            <text class="stat-value">{{ daysWithDog }}</text>
-            <text class="stat-label">在一起(天)</text>
-          </view>
-        </view>
       </view>
     </view>
 
-    <!-- 纪念日 (如果有配置) -->
-    <view v-if="config.anniversary" class="card anniversary-card">
+    <!-- 纪念日 -->
+    <view v-if="anniversaryDate" class="card anniversary-card">
       <text class="card-title">💝 纪念日</text>
-      <text class="anniversary-text">{{ config.anniversary }}</text>
+      <view class="anniversary-stats">
+        <view class="anniversary-stat-item">
+          <text class="anniversary-stat-value">{{ anniversaryDate }}</text>
+          <text class="anniversary-stat-label">在一起的时间</text>
+        </view>
+        <view class="anniversary-stat-item">
+          <text class="anniversary-stat-value">{{ daysTogether }}</text>
+          <text class="anniversary-stat-label">在一起(天)</text>
+        </view>
+      </view>
     </view>
 
     <!-- 底部语录 -->
@@ -105,6 +102,13 @@ import { getSiteConfig, getTempFileUrls } from '@/common/cloud.js'
 
 export default {
   components: { CustomNavbar, SkeletonCard },
+  computed: {
+    aboutLines() {
+      const content = this.config.about_content || ''
+      // 兼容真实换行和字面量 \n
+      return content.split(/\\n|\n/).filter(line => line !== '')
+    },
+  },
   data() {
     return {
       config: {},
@@ -112,6 +116,8 @@ export default {
       dogAge: '',
       dogBirthday: '',
       daysWithDog: null,
+      anniversaryDate: '',
+      daysTogether: null,
       loading: true,
       error: false,
       footerQuote: '感谢你出现在我的生命里 💕',
@@ -128,7 +134,7 @@ export default {
         const config = await getSiteConfig([
           'about_title', 'about_content', 'about_images',
           'dog_name', 'dog_bio', 'dog_birthday',
-          'anniversary', 'footer_quote',
+          'anniversary', 'anniversary_date', 'footer_quote',
         ])
         this.config = config
 
@@ -150,6 +156,13 @@ export default {
           }
           this.dogBirthday = `${birth.getFullYear()}.${String(birth.getMonth() + 1).padStart(2, '0')}.${String(birth.getDate()).padStart(2, '0')}`
           this.daysWithDog = Math.floor((now - birth) / 86400000)
+        }
+
+        if (config.anniversary_date) {
+          const start = new Date(config.anniversary_date)
+          const now = new Date()
+          this.anniversaryDate = `${start.getFullYear()}年${start.getMonth() + 1}月${start.getDate()}日`
+          this.daysTogether = Math.floor((now - start) / 86400000)
         }
 
         if (config.footer_quote) {
@@ -256,7 +269,10 @@ export default {
   font-size: $font-body;
   color: $color-text-secondary;
   line-height: 2;
-  white-space: pre-wrap;
+}
+
+.about-line {
+  display: block;
 }
 
 /* ========== 狗狗卡片 ========== */
@@ -307,6 +323,30 @@ export default {
 }
 
 /* ========== 纪念日卡片 ========== */
+.anniversary-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: $spacing-md 0;
+}
+
+.anniversary-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.anniversary-stat-value {
+  font-size: $font-h2;
+  font-weight: 700;
+  color: $color-primary;
+}
+
+.anniversary-stat-label {
+  font-size: $font-small;
+  color: $color-text-hint;
+}
+
 .anniversary-text {
   font-size: $font-body;
   color: $color-text-secondary;
