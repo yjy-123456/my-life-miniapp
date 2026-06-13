@@ -62,6 +62,22 @@ export async function getPostById(id) {
   return res.data
 }
 
+/**
+ * 获取比指定时间更新的紧挨着的一条动态（下一篇）
+ * @param {Date} createdAt - 当前文章的 createdAt
+ */
+export async function getNewerPost(createdAt) {
+  const res = await db().collection(COLLECTIONS.POSTS)
+    .where({
+      isPublished: true,
+      createdAt: _().gt(createdAt)
+    })
+    .orderBy('createdAt', 'asc')
+    .limit(1)
+    .get()
+  return res.data[0] || null
+}
+
 // ============================================================
 //  狗狗照片 (dog_photos)
 // ============================================================
@@ -207,6 +223,7 @@ export function initCloud() {
 
 export async function getPosts() { return [] }
 export async function getPostById() { return null }
+export async function getNewerPost() { return null }
 export async function getDogPhotos() { return [] }
 export async function getDogPhotoTags() { return ['全部'] }
 export async function getSiteConfig() { return {} }

@@ -44,7 +44,7 @@
           <text class="entry-emoji">🐶</text>
         </view>
         <text class="entry-label">狗狗相册</text>
-        <text class="entry-desc">豆豆的瞬间</text>
+        <text class="entry-desc">海巴的瞬间</text>
       </view>
     </view>
 

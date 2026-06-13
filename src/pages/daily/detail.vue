@@ -118,7 +118,7 @@
 <script>
 import CustomNavbar from '@/components/CustomNavbar.vue'
 import SkeletonCard from '@/components/SkeletonCard.vue'
-import { getPostById, getPosts, getTempFileUrls } from '@/common/cloud.js'
+import { getPostById, getPosts, getTempFileUrls, getNewerPost } from '@/common/cloud.js'
 
 export default {
   components: { CustomNavbar, SkeletonCard },
@@ -182,24 +182,10 @@ export default {
         const older = await getPosts(1, createdAt)
         if (older.length && older[0]._id !== currentId) {
           this.prevPost = older[0]
-        } else if (older.length > 1) {
-          this.prevPost = older[1]
         }
 
-        // 加载后一条（更新的）—— 获取最近2条，找到紧挨着的下一条
-        const newer = await getPosts(2, null)
-        const currentIdx = newer.findIndex((p) => p._id === currentId)
-        if (currentIdx > 0) {
-          this.nextPost = newer[currentIdx - 1]
-        } else if (currentIdx === -1 && newer.length) {
-          // 当前文章不在最新几条中，尝试找到比它更新的
-          const nextIdx = newer.findIndex(
-            (p) => new Date(p.createdAt) > new Date(createdAt)
-          )
-          if (nextIdx >= 0) {
-            this.nextPost = newer[nextIdx]
-          }
-        }
+        // 加载后一条（更新的）：直接用 gt + asc 查紧挨着的下一篇
+        this.nextPost = await getNewerPost(createdAt)
       } catch (e) {
         console.log('加载相邻文章失败', e)
       }

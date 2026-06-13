@@ -68,7 +68,7 @@
 预置数据:
   { key: "cover_images",    value: [] }
   { key: "hero_quote",      value: "我们的故事" }
-  { key: "dog_name",        value: "豆豆" }
+  { key: "dog_name",        value: "海巴" }
   { key: "dog_bio",         value: "" }
   { key: "dog_birthday",    value: "" }
   { key: "about_title",     value: "关于我们" }

@@ -91,7 +91,7 @@
     <view v-else-if="allPhotos.length === 0 && !loading" class="empty-state">
       <text class="empty-emoji">🐶</text>
       <text class="empty-text">还没有照片</text>
-      <text class="empty-hint">豆豆的照片正在赶来的路上~</text>
+      <text class="empty-hint">海巴的照片正在赶来的路上~</text>
     </view>
 
     <!-- 到底了 -->
