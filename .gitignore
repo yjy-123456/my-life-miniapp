@@ -6,3 +6,5 @@ unpackage/
 __pycache__/
 *.pyc
 project.private.config.json
+.agents/
+.claude/settings.local.json
